@@ -12,16 +12,59 @@ class CartItem extends React.Component
         }
         //this.increaseQuantity= this.increaseQuantity.bind(this);
         //use arrow function to avoid this
+        //this.testing();
     }
+
+    //inside promise set state call works synchronously
+    // testing=()=>
+    // {
+    //     const promise=new Promise((resolve,reject)=>{
+    //         setTimeout(()=>{
+    //             resolve('done');
+    //         },5000);
+    //     })
+    //     promise.then(()=>{
+    //         this.setState({
+    //             qty:this.state.qty+100
+    //         })
+    //         console.log("this state",this.state);
+
+    //     })
+
+    // }
+
     //automatically binds ths   
     increaseQuantity =()=>
     {
-        console.log('this.qty',this.state);
+        //set state form1(object form)
+        this.setState({
+            qty:this.state.qty+1
+        })
+
     }
-    fuck=()=>
+    //set state form2 (function form) it basically does shallow merging then rerenders for app
+    // decreaseQuantity=()=>
+    // {
+    //     this.setState((prevState)=>{
+    //         return{
+    //             qty:prevState.qty-1
+    //         }
+    //     })
+    // }
+    decreaseQuantity=()=>
     {
-        console.log("Yes i m called");
+        const {qty}=this.state;
+
+        if(qty<=0)
+        {
+            return ;    
+        }
+        this.setState({
+            qty:this.state.qty-1
+        })
     }
+
+ 
     render()
     {
         //destructuring the object
@@ -41,12 +84,13 @@ class CartItem extends React.Component
                             alt="increase"
                             className="action-icons"
                             src="https://cdn-icons-png.flaticon.com/512/1828/1828926.png" 
-                            onClick={()=>this.increaseQuantity()}
+                            onClick={this.increaseQuantity}
                             />
                         <img
                             alt="decrease"
                             src="https://cdn-icons-png.flaticon.com/512/992/992683.png"
                             className="action-icons"
+                            onClick={this.decreaseQuantity}
                              />
                         <img
                             alt="delete"

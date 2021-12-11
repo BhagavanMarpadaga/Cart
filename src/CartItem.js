@@ -2,18 +2,7 @@ import React from 'react';
 class CartItem extends React.Component
 {
     //adding state is storing local data for particluar component
-    constructor()
-    {
-        super();
-        this.state={
-            price:999,
-            title:"Phone",
-            qty:1 
-        }
-        //this.increaseQuantity= this.increaseQuantity.bind(this);
-        //use arrow function to avoid this
-        //this.testing();
-    }
+  
 
     //inside promise set state call works synchronously
     // testing=()=>
@@ -68,7 +57,8 @@ class CartItem extends React.Component
     render()
     {
         //destructuring the object
-        const {price,title,qty}=this.state;
+        console.log('this.props',this.props.product);
+        const {price,title,qty}=this.props.product;
 
         return(
             <div className="cart-item" style={{marginTop:30}}>

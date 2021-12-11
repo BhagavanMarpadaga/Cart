@@ -23,14 +23,14 @@ class CartItem extends React.Component
     // }
 
     //automatically binds ths   
-    increaseQuantity =()=>
-    {
-        //set state form1(object form)
-        this.setState({
-            qty:this.state.qty+1
-        })
+    // increaseQuantity =()=>
+    // {
+    //     //set state form1(object form)
+    //     this.setState({
+    //         qty:this.state.qty+1
+    //     })
 
-    }
+    // }
     //set state form2 (function form) it basically does shallow merging then rerenders for app
     // decreaseQuantity=()=>
     // {
@@ -57,7 +57,7 @@ class CartItem extends React.Component
     render()
     {
         //destructuring the object
-        console.log('this.props',this.props.product);
+        //console.log('this.props',this.props.product);
         const {price,title,qty}=this.props.product;
 
         return(
@@ -74,13 +74,13 @@ class CartItem extends React.Component
                             alt="increase"
                             className="action-icons"
                             src="https://cdn-icons-png.flaticon.com/512/1828/1828926.png" 
-                            onClick={this.increaseQuantity}
+                            onClick={()=>this.props.onIncreaseQuantity(this.props.product)}
                             />
                         <img
                             alt="decrease"
                             src="https://cdn-icons-png.flaticon.com/512/992/992683.png"
                             className="action-icons"
-                            onClick={this.decreaseQuantity}
+                            onClick={()=>this.props.onDecreaseQuantity(this.props.product)}
                              />
                         <img
                             alt="delete"

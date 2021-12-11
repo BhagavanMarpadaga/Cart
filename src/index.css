@@ -29,5 +29,11 @@ body {
 {
   cursor: pointer;
 }
+.cart
+{
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+}
 
 

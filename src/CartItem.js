@@ -59,6 +59,8 @@ class CartItem extends React.Component
         //destructuring the object
         //console.log('this.props',this.props.product);
         const {price,title,qty}=this.props.product;
+        const{product,onDeleteCartItem}=this.props;
+       // console.log("product id ",product.id);
 
         return(
             <div className="cart-item" style={{marginTop:30}}>
@@ -85,8 +87,10 @@ class CartItem extends React.Component
                         <img
                             alt="delete"
                             src="https://cdn-icons.flaticon.com/png/512/3405/premium/3405244.png?token=exp=1639211820~hmac=06a0283fab158ea15009ca115caa5522"
-                            className="action-icons" />
-
+                            className="action-icons"
+                            onClick={()=>onDeleteCartItem(product.id)}
+                             />
+                            
                     </div>
                 </div>
             </div>

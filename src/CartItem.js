@@ -55,14 +55,15 @@ const CartItem = (props) => {
 
     //destructuring the object
     //console.log('this.props',this.props.product);
-    const { price, title, qty } = props.product;
+    const { price, title, qty ,img} = props.product;
+    console.log("title ",title,img);
     const { product, onDeleteCartItem, onDecreaseQuantity, onIncreaseQuantity } = props;
     // console.log("product id ",product.id);
 
     return (
         <div className="cart-item" style={{ marginTop: 30 }}>
             <div className='left-block'>
-                <img style={Styles.image} />
+                <img style={Styles.image} src={img}/>
             </div>
             <div className="right-block">
                 <div style={{ fontSize: 35 }}>{title}</div>

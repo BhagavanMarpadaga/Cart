@@ -1,93 +1,30 @@
 import React from 'react';
 import CartItem from './CartItem';
 
-class Cart extends React.Component
-{
+const Cart = (props) => {
 
-    constructor()
-    {
-        super();
-        this.state = {
-            products: [
-                {
-                    price: 999,
-                    title: "Phone",
-                    qty: 1,
-                    id:1
-                },
-                {
-                    price: 999,
-                    title: "watch",
-                    qty: 1,
-                    id:2
-                }, 
-                {
-                    price: 999,
-                    title: "watch",
-                    qty: 1,
-                    id:3
-                }
-            ]
-
-        }
-    }
-    handleonIncreaseQuantity=(product)=>{
-        const {products} =this.state;
-        //console.log(prod);
-        const index=products.indexOf(product);
-        products[index].qty+=1;
-        this.setState({
-            products:products
-        })
-        //console.log("yes you need to in the qty of this item",product);
-    }
-    handleondecreaseQuantity=(product)=>{
-        if(product.qty<=0)
-        {
-            return;
-        }
-        const {products} =this.state;
-        const index=products.indexOf(product);
-        products[index].qty-=1;
-        this.setState({
-            products:products
-        })
-    }
-    handleDeletecartItem=(id)=>{
-        const {products}=this.state;
+    //destructing the object
+    const { products } = props;
+   // console.log("In side Cart with props",props);
+    //console.log("prodcuts in side render",products);
+    return (
         
-
-        const restItems=products.filter((item)=>item.id!=id);
-
-        this.setState({
-            products:restItems
-        })
-    }
-
-    render(){
-        //destructing the object
-        const {products}=this.state;
-        //console.log("prodcuts in side render",products);
-        return(
-            <div className="cart">
-                {products.map((cartItem) => {
-                    return(
-                        <CartItem
-                            product={cartItem}
-                            key={cartItem.id}
-                            onIncreaseQuantity={this.handleonIncreaseQuantity}
-                            onDecreaseQuantity={this.handleondecreaseQuantity}
-                            onDeleteCartItem={this.handleDeletecartItem}
-
-                        />
-                    )
-                })}
+        <div className="cart">
+            {products.map((cartItem) => {
+                return (
+                    <CartItem
+                        product={cartItem}
+                        key={cartItem.id}
+                        onIncreaseQuantity={props.onIncreaseQuantity}
+                        onDecreaseQuantity={props.onDecreaseQuantity}
+                        onDeleteCartItem={props.onDeleteCartItem}
+                    />
+                )
+            })}
+        </div>
+    )
 
 
-            </div>
-        )
-
-    }
 
 }
 

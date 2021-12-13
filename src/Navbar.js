@@ -6,6 +6,7 @@ const Navbar=(props)=>
   //console.log("inside nav bar",props,props.count);
         return(
             <div className="navbar" style={Styles.nav}>
+              <h1 className="title" style={{marginLeft:40,fontSize:50,color:'gray',color:"#1c1615"}}>Cart</h1>
                 <div className="cartIconContainer" style={Styles.cartIconContainer}>
                     <img style={Styles.cartIcon} src="https://cdn-icons-png.flaticon.com/512/34/34568.png" alt="cart-icon"/>
                     <span style={Styles.cartCount}>{props.count}</span>
@@ -23,9 +24,10 @@ const Styles = {
       height: 70,
       background: '#4267b2',
       display: 'flex',
-      justifyContent: 'flex-end',
+      justifyContent: 'space-between',
       alignItems: 'center'
     },
+
     cartIconContainer: {
       position: 'relative'
     },

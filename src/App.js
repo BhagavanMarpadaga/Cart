@@ -38,11 +38,22 @@ class App extends React.Component {
     const { products } = this.state;
     //console.log(prod);
     const index = products.indexOf(product);
-    products[index].qty += 1;
-    this.setState({
-      products: products
-    })
-    //console.log("yes you need to in the qty of this item",product);
+    //increase the quantity in database as well
+    const docref=this.db.collection('Products').doc(products[index].id);
+    docref.update(
+      {
+        qty:products[index].qty+1
+      }
+    ).then(()=>{
+      console.log("updated successfully");
+    }).catch((err)=>{
+      console.log("Error while increasing the quantity in DB");
+    })  
+    // products[index].qty + 1;
+    // this.setState({
+    //   products: products
+    // })
+    // //console.log("yes you need to in the qty of this item",product);
   }
   handleondecreaseQuantity = (product) => {
     if (product.qty <= 0) {
@@ -50,17 +61,32 @@ class App extends React.Component {
     }
     const { products } = this.state;
     const index = products.indexOf(product);
+    const docref=this.db.collection('Products').doc(products[index].id);
+    docref.update({
+      qty:products[index].qty-1
+    }).then(()=>{
+      console.log("Item upadted successfuly");
+    })
+    .catch((err)=>{
+      console.log("Failed to decreasw the quantity in db");
+    })
+
     products[index].qty -= 1;
     this.setState({
       products: products
     })
   }
   handleDeletecartItem = (id) => {
-    const { products } = this.state;
-    const restItems = products.filter((item) => item.id != id);
-    this.setState({
-      products: restItems
+    const docref=this.db.collection('Products').doc(id);
+    docref.delete().then(()=>{
+      console.log("Item deleted");
     })
+
+    // const { products } = this.state;
+    // const restItems = products.filter((item) => item.id != id);
+    // this.setState({
+    //   products: restItems
+    // })
   }
 
   getCount=()=>{
@@ -111,7 +137,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navbar count={this.getCount()}/>
-        <button style={{fontSize:15, padding:15}} onClick={this.addItem}>Click here to add a item</button>
+        {/* <button style={{fontSize:15, padding:15}} onClick={this.addItem}>Click here to add a item</button> */}
         <Cart
           products={products}
           onIncreaseQuantity={this.handleonIncreaseQuantity}
@@ -119,7 +145,7 @@ class App extends React.Component {
           onDeleteCartItem={this.handleDeletecartItem}
         />
         {loading && <h1>Loading ...</h1>}
-        {!loading && <div>Total:{this.totalPrice()}</div>}
+        {!loading && <div style={{margin:20,width:200,padding:20,border: '1px solid rgba(0, 0, 0, 0.05)',backgroundColor:'#d7d5dd',fontSize:20,fontWeight:'bold'}}>Total : {this.totalPrice()}</div>}
         
         
       </div>
@@ -127,8 +153,7 @@ class App extends React.Component {
     );
 
   }
-
-
 }
+
 
 export default App;
